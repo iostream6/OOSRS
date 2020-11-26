@@ -95,7 +95,7 @@ public class Course {
     }
 
     public boolean hasPrerequisites() {
-        return prerequisites.size() > 0;
+        return !prerequisites.isEmpty();
     }
 
     public Collection<Course> getPrerequisites() {
