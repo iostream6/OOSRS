@@ -1,9 +1,11 @@
 // Models library
 // --------------
-// Classes: Person
-
+// Classes: Course | EnrollmentStatus | Person | Proffessor |  SceduleOfClasses | Section | Student | Transcript | TrasncriptEntry 
+//
+// 
 /*
  * 2020.11.25  - Created 
+ * 2020.11.26  - Fixed bug - Models/Section.enroll() use for in, since no way to return from foreach in Dart
  */
 
 // ******************************************* //
@@ -80,21 +82,6 @@ enum EnrollmentStatus {
   SECTION_FULL,
   PREREQ,
   ENROLLED
-
-  // // This represents the value of an enum instance.
-  // private final String value;
-
-  // // A 'constructor' of sorts (used above).
-  // EnrollmentStatus(String value) {
-  // 	this.value = value;
-  // }
-
-  // // Accessor for the value of an enum instance.
-  // public String value() {
-  // 	return value;
-  // }
-
-  //static const enrollmentInfo = {};
 }
 
 const enrollmentInfoMap = {
@@ -329,13 +316,13 @@ class Section {
     //Course c = this.getRepresentedCourse();
 
     if (representedCourse.hasPrerequisites()) {
-      representedCourse.prerequisites.forEach((pre) {
+      for(Course pre in representedCourse.prerequisites){
         // See if the Student's Transcript reflects
         // successful completion of the prerequisite.
         if (!transcript.verifyCompletion(pre)) {
           return EnrollmentStatus.PREREQ;
         }
-      });
+      }
     }
 
     // If the total enrollment is already at the the capacity for this Section, we reject this

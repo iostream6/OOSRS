@@ -7,7 +7,6 @@ List<Course> courseCatalog;
 ScheduleOfClasses scheduleOfClasses = new ScheduleOfClasses('SP2005');
 
 void main(List<String> arguments) {
-
   Professor p1, p2, p3;
 
   Student s1, s2, s3;
@@ -118,100 +117,100 @@ void main(List<String> arguments) {
 
   //
   // Simulate students attempting to enroll in sections of
-		// various courses.
+  // various courses.
 
-		print('Student ${s1.name} is attempting to enroll in ${sec1.toString()}');
+  print('Student ${s1.name} is attempting to enroll in ${sec1.toString()}');
 
-		EnrollmentStatus status = sec1.enroll(s1);
-		_reportStatus(status);
+  EnrollmentStatus status = sec1.enroll(s1);
+  _reportStatus(status);
 
-		// Note the use of a special 'housekeeping' method above, _reportStatus(), 
-		// to interpret and display the outcome of this enrollment request.
-		// We could have combined the preceding two lines with
-		// a single line instead, as follows:
-		//
-		//	_reportStatus(sec1.enroll(s1));
-		//
-		// And, since the print() call just above that is also going to
-		// be repeated multiple times, we could have combined ALL THREE 
-		// LINES of code into a SINGLE line as follows:
-		//
-		//      _attemptToEnroll(s1, sec1);
-		// 
-		// by writing a more elaborate 'housekeeping' method, _attemptToEnroll().
-	 	// We will, in fact, do so, and will use the more concise syntax for the 
-		// remainder of this program.
+  // Note the use of a special 'housekeeping' method above, _reportStatus(),
+  // to interpret and display the outcome of this enrollment request.
+  // We could have combined the preceding two lines with
+  // a single line instead, as follows:
+  //
+  //	_reportStatus(sec1.enroll(s1));
+  //
+  // And, since the print() call just above that is also going to
+  // be repeated multiple times, we could have combined ALL THREE
+  // LINES of code into a SINGLE line as follows:
+  //
+  //      _attemptToEnroll(s1, sec1);
+  //
+  // by writing a more elaborate 'housekeeping' method, _attemptToEnroll().
+  // We will, in fact, do so, and will use the more concise syntax for the
+  // remainder of this program.
 
-		// Try concurrently enrolling the same Student in a different Section
-		// of the SAME Course!  This should fail.
+  // Try concurrently enrolling the same Student in a different Section
+  // of the SAME Course!  This should fail.
 
-		_attemptToEnroll(s1, sec2);
+  _attemptToEnroll(s1, sec2);
 
-		// This enrollment request should be fine ...
+  // This enrollment request should be fine ...
 
-		_attemptToEnroll(s2, sec2);
+  _attemptToEnroll(s2, sec2);
 
-		// ... but here, the student in question hasn't satisfied the
-		// prerequisities, so the enrollment request should be rejected.
+  // ... but here, the student in question hasn't satisfied the
+  // prerequisities, so the enrollment request should be rejected.
 
-		_attemptToEnroll(s2, sec3);//TODO this is not failing, why?
+  _attemptToEnroll(s2, sec3);
 
-		// These requests should both be fine. 
+  // These requests should both be fine.
 
-		_attemptToEnroll(s2, sec7);
-		_attemptToEnroll(s3, sec1);
+  _attemptToEnroll(s2, sec7);
+  _attemptToEnroll(s3, sec1);
 
-		// When the dust settles, here's what folks wound up
-		// being SUCCESSFULLY registered for:
-		//
-		// sec1:  s1, s3
-		// sec2:  s2
-		// sec7:  s2
+  // When the dust settles, here's what folks wound up
+  // being SUCCESSFULLY registered for:
+  //
+  // sec1:  s1, s3
+  // sec2:  s2
+  // sec7:  s2
 
-		// Semester is finished (boy, that was quick!).  
-		// Professors assign grades for specific students.
+  // Semester is finished (boy, that was quick!).
+  // Professors assign grades for specific students.
 
-		sec1.postGrade(s1, 'C+');
-		sec1.postGrade(s3, 'A');
-		sec2.postGrade(s2, 'B+');
-		sec7.postGrade(s2, 'A-');
-	
-		// Let's see if everything got set up properly
-		// by calling various display() methods.
-		
-		print('====================');
-		print('Schedule of Classes:');
-		print('====================');
-		print('');
-		scheduleOfClasses.display();
+  sec1.postGrade(s1, 'C+');
+  sec1.postGrade(s3, 'A');
+  sec2.postGrade(s2, 'B+');
+  sec7.postGrade(s2, 'A-');
 
-		print('======================');
-		print('Professor Information:');
-		print('======================');
-		print('');
-		p1.display();
-		p2.display();
-		p3.display();
+  // Let's see if everything got set up properly
+  // by calling various display() methods.
 
-		print('====================');
-		print('Student Information:');
-		print('====================');
-		print('');
-		s1.display();
-		s2.display();
-		s3.display();
+  print('====================');
+  print('Schedule of Classes:');
+  print('====================');
+  print('');
+  scheduleOfClasses.display();
+
+  print('======================');
+  print('Professor Information:');
+  print('======================');
+  print('');
+  p1.display();
+  p2.display();
+  p3.display();
+
+  print('====================');
+  print('Student Information:');
+  print('====================');
+  print('');
+  s1.display();
+  s2.display();
+  s3.display();
 }
 
 // Note that this is a private static housekeeping method ...
 void _reportStatus(EnrollmentStatus s) {
-		print('Status:  ${enrollmentInfoMap[s]}');
-		print('');
-	}
+  print('Status:  ${enrollmentInfoMap[s]}');
+  print('');
+}
 
-  // ... as is this.
+// ... as is this.
 
-	void _attemptToEnroll(Student s, Section sec) {
-		print('Student ${s.name} is attempting to enroll in ${sec.toString()}');
-		// Utilize one housekeeping method from within another!
-		_reportStatus(sec.enroll(s));
-	}
+void _attemptToEnroll(Student s, Section sec) {
+  print('Student ${s.name} is attempting to enroll in ${sec.toString()}');
+  // Utilize one housekeeping method from within another!
+  _reportStatus(sec.enroll(s));
+}
